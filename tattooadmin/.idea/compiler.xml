@@ -10,6 +10,10 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Pedidex" target="1.7" />
+      <module name="Pedidex-ear" target="1.7" />
+      <module name="Pedidex-ejb" target="1.7" />
+      <module name="Pedidex-web" target="1.7" />
       <module name="tattooAdmin" target="1.8" />
     </bytecodeTargetLevel>
   </component>
