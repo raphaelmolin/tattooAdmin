@@ -22,9 +22,7 @@ public enum TipoTelefone {
 
     @Override
     public String toString() {
-        return "TipoTelefone{" +
-                "id='" + id + '\'' +
-                ", descricao='" + descricao + '\'' +
-                '}';
+        return "TipoTelefone{" + "id=" + id + ", descricao=" + descricao + '}';
     }
+
 }

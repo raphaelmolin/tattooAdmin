@@ -12,12 +12,8 @@ public class PessoaTelefone {
 
     @Id
     @Column(name = "id_pessoa_telefone")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SEQ_PESSOA_TELEFONES")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PESSOA_TELEFONES")
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "id_pessoa")
-    private Pessoa pessoa;
 
     @Column(name = "tipo")
     private TipoTelefone tipo;
@@ -37,14 +33,6 @@ public class PessoaTelefone {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
     }
 
     public TipoTelefone getTipo() {
@@ -80,32 +68,48 @@ public class PessoaTelefone {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PessoaTelefone that = (PessoaTelefone) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(pessoa, that.pessoa) &&
-                tipo == that.tipo &&
-                Objects.equals(descricao, that.descricao) &&
-                Objects.equals(email, that.email) &&
-                Objects.equals(principal, that.principal);
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 * hash + Objects.hashCode(this.id);
+        hash = 31 * hash + Objects.hashCode(this.tipo);
+        hash = 31 * hash + Objects.hashCode(this.descricao);
+        hash = 31 * hash + Objects.hashCode(this.email);
+        hash = 31 * hash + Objects.hashCode(this.principal);
+        return hash;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id, pessoa, tipo, descricao, email, principal);
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PessoaTelefone other = (PessoaTelefone) obj;
+        if (!Objects.equals(this.descricao, other.descricao)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.principal, other.principal)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (this.tipo != other.tipo) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "PessoaTelefone{" +
-                "id=" + id +
-                ", pessoa=" + pessoa +
-                ", tipo=" + tipo +
-                ", descricao='" + descricao + '\'' +
-                ", email='" + email + '\'' +
-                ", principal='" + principal + '\'' +
-                '}';
+        return "PessoaTelefone{" + "id=" + id + ", tipo=" + tipo + ", descricao=" + descricao + ", email=" + email + ", principal=" + principal + '}';
     }
 }

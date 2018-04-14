@@ -24,9 +24,7 @@ public enum CategoriaPessoa {
 
     @Override
     public String toString() {
-        return "CategoriaPessoa{" +
-                "id='" + id + '\'' +
-                ", descricao='" + descricao + '\'' +
-                '}';
+        return "CategoriaPessoa{" + "id=" + id + ", descricao=" + descricao + '}';
     }
+
 }

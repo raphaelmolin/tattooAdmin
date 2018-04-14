@@ -11,12 +11,8 @@ public class PessoaTattoo {
 
     @Id
     @Column(name = "id_pessoa_tattoo")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SEQ_PESSOA_TATTOOS")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PESSOA_TATTOOS")
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "id_pessoa")
-    private Pessoa pessoa;
 
     @ManyToOne
     @JoinColumn(name = "id_tattoo")
@@ -36,14 +32,6 @@ public class PessoaTattoo {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
     }
 
     public Tattoo getTattoo() {
@@ -71,30 +59,45 @@ public class PessoaTattoo {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PessoaTattoo that = (PessoaTattoo) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(pessoa, that.pessoa) &&
-                Objects.equals(tattoo, that.tattoo) &&
-                Objects.equals(realizacao, that.realizacao) &&
-                Objects.equals(tatuador, that.tatuador);
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.id);
+        hash = 79 * hash + Objects.hashCode(this.tattoo);
+        hash = 79 * hash + Objects.hashCode(this.realizacao);
+        hash = 79 * hash + Objects.hashCode(this.tatuador);
+        return hash;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id, pessoa, tattoo, realizacao, tatuador);
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PessoaTattoo other = (PessoaTattoo) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.tattoo, other.tattoo)) {
+            return false;
+        }
+        if (!Objects.equals(this.realizacao, other.realizacao)) {
+            return false;
+        }
+        if (!Objects.equals(this.tatuador, other.tatuador)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "PessoaTattoo{" +
-                "id=" + id +
-                ", pessoa=" + pessoa +
-                ", tattoo=" + tattoo +
-                ", realizacao=" + realizacao +
-                ", tatuador=" + tatuador +
-                '}';
+        return "PessoaTattoo{" + "id=" + id + ", tattoo=" + tattoo + ", realizacao=" + realizacao + ", tatuador=" + tatuador + '}';
     }
+
 }

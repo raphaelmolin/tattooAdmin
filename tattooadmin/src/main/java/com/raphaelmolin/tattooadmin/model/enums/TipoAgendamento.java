@@ -23,9 +23,7 @@ public enum TipoAgendamento {
 
     @Override
     public String toString() {
-        return "TipoAgendamento{" +
-                "id='" + id + '\'' +
-                ", descricao='" + descricao + '\'' +
-                '}';
+        return "TipoAgendamento{" + "id=" + id + ", descricao=" + descricao + '}';
     }
+
 }

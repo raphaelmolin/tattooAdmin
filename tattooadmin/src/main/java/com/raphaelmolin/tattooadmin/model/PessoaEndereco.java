@@ -10,12 +10,8 @@ public class PessoaEndereco {
 
     @Id
     @Column(name = "id_pessoa_endereco")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SEQ_PESSOA_ENDERECOS")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PESSOA_ENDERECOS")
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "id_pessoa")
-    private Pessoa pessoa;
 
     @Column(name = "logradouro")
     private String logradouro;
@@ -41,14 +37,6 @@ public class PessoaEndereco {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
     }
 
     public String getLogradouro() {
@@ -100,36 +88,56 @@ public class PessoaEndereco {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PessoaEndereco that = (PessoaEndereco) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(pessoa, that.pessoa) &&
-                Objects.equals(logradouro, that.logradouro) &&
-                Objects.equals(numero, that.numero) &&
-                Objects.equals(bairro, that.bairro) &&
-                Objects.equals(cidade, that.cidade) &&
-                Objects.equals(estado, that.estado) &&
-                Objects.equals(cep, that.cep);
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.id);
+        hash = 29 * hash + Objects.hashCode(this.logradouro);
+        hash = 29 * hash + Objects.hashCode(this.numero);
+        hash = 29 * hash + Objects.hashCode(this.bairro);
+        hash = 29 * hash + Objects.hashCode(this.cidade);
+        hash = 29 * hash + Objects.hashCode(this.estado);
+        hash = 29 * hash + Objects.hashCode(this.cep);
+        return hash;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id, pessoa, logradouro, numero, bairro, cidade, estado, cep);
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PessoaEndereco other = (PessoaEndereco) obj;
+        if (!Objects.equals(this.logradouro, other.logradouro)) {
+            return false;
+        }
+        if (!Objects.equals(this.numero, other.numero)) {
+            return false;
+        }
+        if (!Objects.equals(this.bairro, other.bairro)) {
+            return false;
+        }
+        if (!Objects.equals(this.cidade, other.cidade)) {
+            return false;
+        }
+        if (!Objects.equals(this.estado, other.estado)) {
+            return false;
+        }
+        if (!Objects.equals(this.cep, other.cep)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "PessoaEndereco{" +
-                "id=" + id +
-                ", pessoa=" + pessoa +
-                ", logradouro='" + logradouro + '\'' +
-                ", numero='" + numero + '\'' +
-                ", bairro='" + bairro + '\'' +
-                ", cidade='" + cidade + '\'' +
-                ", estado='" + estado + '\'' +
-                ", cep='" + cep + '\'' +
-                '}';
+        return "PessoaEndereco{" + "id=" + id + ", logradouro=" + logradouro + ", numero=" + numero + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado + ", cep=" + cep + '}';
     }
 }

@@ -11,7 +11,7 @@ public class Tattoo {
 
     @Id
     @Column(name = "id_tattoo")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SEQ_TATTOOS")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_TATTOOS")
     private Long id;
 
     @Column(name = "nome")
@@ -56,28 +56,44 @@ public class Tattoo {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Tattoo tattoo = (Tattoo) o;
-        return Objects.equals(id, tattoo.id) &&
-                Objects.equals(nome, tattoo.nome) &&
-                Objects.equals(caminho, tattoo.caminho) &&
-                Objects.equals(preco, tattoo.preco);
+    public int hashCode() {
+        int hash = 5;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        hash = 53 * hash + Objects.hashCode(this.nome);
+        hash = 53 * hash + Objects.hashCode(this.caminho);
+        hash = 53 * hash + Objects.hashCode(this.preco);
+        return hash;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id, nome, caminho, preco);
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Tattoo other = (Tattoo) obj;
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (!Objects.equals(this.caminho, other.caminho)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.preco, other.preco)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "Tattoo{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", caminho='" + caminho + '\'' +
-                ", preco=" + preco +
-                '}';
+        return "Tattoo{" + "id=" + id + ", nome=" + nome + ", caminho=" + caminho + ", preco=" + preco + '}';
     }
 }

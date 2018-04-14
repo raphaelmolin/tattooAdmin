@@ -10,12 +10,8 @@ public class PessoaEmail {
 
     @Id
     @Column(name = "id_pessoa_email")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SEQ_PESSOA_EMAILS")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PESSOA_EMAILS")
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "id_pessoa")
-    private Pessoa pessoa;
 
     @Column(name = "descricao")
     private String descricao;
@@ -32,14 +28,6 @@ public class PessoaEmail {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
     }
 
     public String getDescricao() {
@@ -67,30 +55,45 @@ public class PessoaEmail {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PessoaEmail that = (PessoaEmail) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(pessoa, that.pessoa) &&
-                Objects.equals(descricao, that.descricao) &&
-                Objects.equals(email, that.email) &&
-                Objects.equals(principal, that.principal);
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.id);
+        hash = 83 * hash + Objects.hashCode(this.descricao);
+        hash = 83 * hash + Objects.hashCode(this.email);
+        hash = 83 * hash + Objects.hashCode(this.principal);
+        return hash;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id, pessoa, descricao, email, principal);
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PessoaEmail other = (PessoaEmail) obj;
+        if (!Objects.equals(this.descricao, other.descricao)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.principal, other.principal)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "PessoaEmail{" +
-                "id=" + id +
-                ", pessoa=" + pessoa +
-                ", descricao='" + descricao + '\'' +
-                ", email='" + email + '\'' +
-                ", principal='" + principal + '\'' +
-                '}';
+        return "PessoaEmail{" + "id=" + id + ", descricao=" + descricao + ", email=" + email + ", principal=" + principal + '}';
     }
+
 }

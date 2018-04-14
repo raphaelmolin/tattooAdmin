@@ -16,7 +16,7 @@ public class Agendamento {
 
     @Id
     @Column(name = "id_agendamentos")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SEQ_AGENDAMENTOS")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_AGENDAMENTOS")
     private Long id;
 
     @Column(name = "tipo_agendamento")
@@ -177,48 +177,85 @@ public class Agendamento {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Agendamento that = (Agendamento) o;
-        return Objects.equals(id, that.id) &&
-                tipo == that.tipo &&
-                Objects.equals(titulo, that.titulo) &&
-                Objects.equals(descricao, that.descricao) &&
-                Objects.equals(cliente, that.cliente) &&
-                Objects.equals(tatuador, that.tatuador) &&
-                Objects.equals(tattoos, that.tattoos) &&
-                Objects.equals(atendimento, that.atendimento) &&
-                Objects.equals(retorno, that.retorno) &&
-                Objects.equals(agendamento, that.agendamento) &&
-                situacao == that.situacao &&
-                Objects.equals(sessoes, that.sessoes) &&
-                Objects.equals(valorOrcado, that.valorOrcado) &&
-                Objects.equals(valorAtual, that.valorAtual);
+    public int hashCode() {
+        int hash = 5;
+        hash = 61 * hash + Objects.hashCode(this.id);
+        hash = 61 * hash + Objects.hashCode(this.tipo);
+        hash = 61 * hash + Objects.hashCode(this.titulo);
+        hash = 61 * hash + Objects.hashCode(this.descricao);
+        hash = 61 * hash + Objects.hashCode(this.cliente);
+        hash = 61 * hash + Objects.hashCode(this.tatuador);
+        hash = 61 * hash + Objects.hashCode(this.tattoos);
+        hash = 61 * hash + Objects.hashCode(this.atendimento);
+        hash = 61 * hash + Objects.hashCode(this.retorno);
+        hash = 61 * hash + Objects.hashCode(this.agendamento);
+        hash = 61 * hash + Objects.hashCode(this.situacao);
+        hash = 61 * hash + Objects.hashCode(this.sessoes);
+        hash = 61 * hash + Objects.hashCode(this.valorOrcado);
+        hash = 61 * hash + Objects.hashCode(this.valorAtual);
+        return hash;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id, tipo, titulo, descricao, cliente, tatuador, tattoos, atendimento, retorno, agendamento, situacao, sessoes, valorOrcado, valorAtual);
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Agendamento other = (Agendamento) obj;
+        if (!Objects.equals(this.titulo, other.titulo)) {
+            return false;
+        }
+        if (!Objects.equals(this.descricao, other.descricao)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (this.tipo != other.tipo) {
+            return false;
+        }
+        if (!Objects.equals(this.cliente, other.cliente)) {
+            return false;
+        }
+        if (!Objects.equals(this.tatuador, other.tatuador)) {
+            return false;
+        }
+        if (!Objects.equals(this.tattoos, other.tattoos)) {
+            return false;
+        }
+        if (!Objects.equals(this.atendimento, other.atendimento)) {
+            return false;
+        }
+        if (!Objects.equals(this.retorno, other.retorno)) {
+            return false;
+        }
+        if (!Objects.equals(this.agendamento, other.agendamento)) {
+            return false;
+        }
+        if (this.situacao != other.situacao) {
+            return false;
+        }
+        if (!Objects.equals(this.sessoes, other.sessoes)) {
+            return false;
+        }
+        if (!Objects.equals(this.valorOrcado, other.valorOrcado)) {
+            return false;
+        }
+        if (!Objects.equals(this.valorAtual, other.valorAtual)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "Agendamento{" +
-                "id=" + id +
-                ", tipo=" + tipo +
-                ", titulo='" + titulo + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", cliente=" + cliente +
-                ", tatuador=" + tatuador +
-                ", tattoos=" + tattoos +
-                ", atendimento=" + atendimento +
-                ", retorno=" + retorno +
-                ", agendamento=" + agendamento +
-                ", situacao=" + situacao +
-                ", sessoes=" + sessoes +
-                ", valorOrcado=" + valorOrcado +
-                ", valorAtual=" + valorAtual +
-                '}';
+        return "Agendamento{" + "id=" + id + ", tipo=" + tipo + ", titulo=" + titulo + ", descricao=" + descricao + ", cliente=" + cliente + ", tatuador=" + tatuador + ", tattoos=" + tattoos + ", atendimento=" + atendimento + ", retorno=" + retorno + ", agendamento=" + agendamento + ", situacao=" + situacao + ", sessoes=" + sessoes + ", valorOrcado=" + valorOrcado + ", valorAtual=" + valorAtual + '}';
     }
+
 }

@@ -14,7 +14,7 @@ public class Pessoa {
 
     @Id
     @Column(name = "id_pessoa")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SEQ_PESSOAS")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PESSOAS")
     private Long id;
 
     @Column(name = "tipo_pessoa")
@@ -129,40 +129,70 @@ public class Pessoa {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Pessoa pessoa = (Pessoa) o;
-        return Objects.equals(id, pessoa.id) &&
-                tipo == pessoa.tipo &&
-                categoria == pessoa.categoria &&
-                Objects.equals(nome, pessoa.nome) &&
-                Objects.equals(nomeFantasia, pessoa.nomeFantasia) &&
-                Objects.equals(documento, pessoa.documento) &&
-                Objects.equals(enderecos, pessoa.enderecos) &&
-                Objects.equals(telefones, pessoa.telefones) &&
-                Objects.equals(emails, pessoa.emails) &&
-                Objects.equals(tattoos, pessoa.tattoos);
+    public int hashCode() {
+        int hash = 3;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        hash = 53 * hash + Objects.hashCode(this.tipo);
+        hash = 53 * hash + Objects.hashCode(this.categoria);
+        hash = 53 * hash + Objects.hashCode(this.nome);
+        hash = 53 * hash + Objects.hashCode(this.nomeFantasia);
+        hash = 53 * hash + Objects.hashCode(this.documento);
+        hash = 53 * hash + Objects.hashCode(this.enderecos);
+        hash = 53 * hash + Objects.hashCode(this.telefones);
+        hash = 53 * hash + Objects.hashCode(this.emails);
+        hash = 53 * hash + Objects.hashCode(this.tattoos);
+        return hash;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id, tipo, categoria, nome, nomeFantasia, documento, enderecos, telefones, emails, tattoos);
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pessoa other = (Pessoa) obj;
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (!Objects.equals(this.nomeFantasia, other.nomeFantasia)) {
+            return false;
+        }
+        if (!Objects.equals(this.documento, other.documento)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (this.tipo != other.tipo) {
+            return false;
+        }
+        if (this.categoria != other.categoria) {
+            return false;
+        }
+        if (!Objects.equals(this.enderecos, other.enderecos)) {
+            return false;
+        }
+        if (!Objects.equals(this.telefones, other.telefones)) {
+            return false;
+        }
+        if (!Objects.equals(this.emails, other.emails)) {
+            return false;
+        }
+        if (!Objects.equals(this.tattoos, other.tattoos)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "Pessoa{" +
-                "id=" + id +
-                ", tipo=" + tipo +
-                ", categoria=" + categoria +
-                ", nome='" + nome + '\'' +
-                ", nomeFantasia='" + nomeFantasia + '\'' +
-                ", documento='" + documento + '\'' +
-                ", enderecos=" + enderecos +
-                ", telefones=" + telefones +
-                ", emails=" + emails +
-                ", tattoos=" + tattoos +
-                '}';
+        return "Pessoa{" + "id=" + id + ", tipo=" + tipo + ", categoria=" + categoria + ", nome=" + nome + ", nomeFantasia=" + nomeFantasia + ", documento=" + documento + ", enderecos=" + enderecos + ", telefones=" + telefones + ", emails=" + emails + ", tattoos=" + tattoos + '}';
     }
+
+    
 }
